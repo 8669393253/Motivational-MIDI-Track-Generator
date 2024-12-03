@@ -1,0 +1,40 @@
+1. MIDI File Creation and Setup:
+   - MIDI File: The script creates a new MIDI file using `mido.MidiFile()`.
+   - Track Creation: A track is added to the MIDI file using `MidiTrack()`. This is where all the musical data (notes, messages) is placed.
+
+2. Adding Chords:
+   - Function for Chords: The `add_chord()` function takes a list of notes (the chord), velocity (volume), and time (duration for each chord).
+   - Chord Notes: For each chord, the script sends `note_on` messages to play the notes, followed by `note_off` messages after a specified duration (`time` in ticks).
+   - Time Handling: Each chord is held for 480 ticks (equivalent to one beat at 120 BPM).
+
+3. Adding Melody:
+   - Function for Melody: The `add_melody()` function adds individual melody notes to the track. It uses a similar approach to adding chords but works on single notes instead of multiple notes at once.
+   - Time per Note: Each note in the melody is played for 240 ticks (half a beat), creating a fast-paced effect.
+
+4. Tempo and Timing:
+   - Setting Tempo: The script sets the tempo using `MetaMessage('set_tempo', tempo=mido.bpm2tempo(120))`, where `120` is the beats per minute (BPM).
+   - BPM to Tempo Conversion: The function `mido.bpm2tempo()` converts BPM to the MIDI tempo format (which is in microseconds per beat).
+
+5. MIDI Messages:
+   - Message Types: The two main types of MIDI messages used are:
+     - `note_on`: This starts the note (plays the sound).
+     - `note_off`: This stops the note (ends the sound).
+   - Velocity: Velocity is used to control the volume of the notes. It is set to 80 for the chords and 100 for the melody notes in this script.
+   
+6. MIDI File Saving:
+   - The MIDI data is saved as a file named `'motivational_track.mid'` using the `mid.save()` function.
+   - This file can be played on any MIDI-compatible software or hardware.
+
+7. Customization Options:
+   - Chords and Melody: The user can modify the list of chords and the melody to customize the musical style.
+   - Velocity and Time: The `velocity` and `time` parameters can be adjusted to change the dynamics and timing of the notes.
+   - Tempo: Changing the tempo (`bpm2tempo()`) will speed up or slow down the overall track.
+
+8. Use of mido Library:
+   - The script uses the `mido` library for handling MIDI file creation, reading, and manipulation. It’s a powerful library that provides easy access to MIDI messages and tracks.
+
+9. Efficiency:
+   - The script is structured efficiently by defining functions (`add_chord()` and `add_melody()`) to minimize redundancy when adding multiple chords or melody notes to the track.
+
+10. General Workflow:
+   - The overall workflow is to first set up the track, add the desired musical elements (chords and melody), set the tempo, and then save the MIDI file. It follows a clean and modular approach, which makes it easy to modify and extend.
